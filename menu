@@ -1,0 +1,453 @@
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_mixer.h>
+#include<SDL/SDL_ttf.h>
+int main ( int argc, char** argv )
+{ int n=2,l=1,s=1,e=1,e1,x,y,x1,y1,optionn=1,i=0;
+   SDL_Surface *screen=NULL , *image=NULL, *imageNEWGAME=NULL, *imageLOAD=NULL, *imageSETTINGS=NULL, *imageEXIT=NULL,*pe=NULL,*pleinecran=NULL, *imageNEWGAME1=NULL,*imageLOAD1=NULL,*imageSETTINGS1=NULL,*imageEXIT1=NULL,*text=NULL,*menu=NULL,*story=NULL,*texte=NULL,*curseur=NULL,*img=NULL,*op=NULL,*vol=NULL;
+   SDL_Rect posback,posNEWGAME,posLOAD,posSETTINGS,posEXIT,posimg, posNEWGAME1,posLOAD1,posSETTINGS1,posEXIT1,posTXT,posMENU,posSTORY,postexte,poscurseur,posecran,posOP,posVOL,pospe,pospleinecran;
+   SDL_Event event;
+   SDL_WM_SetCaption("SDL_Mixer",NULL);
+   int box_x=50;
+   int box_h=50;
+   int box_w=353;
+   int box_y=300;
+   int box_y1=400;
+   int box_y2=450;
+   int box_y3=500;
+       posback.x=0;
+       posback.y=0;
+   posNEWGAME.x=50;
+   posNEWGAME.y=300;
+       posNEWGAME1.x=50;
+       posNEWGAME1.y=300;
+   posLOAD.x=50;
+   posLOAD.y=380;
+       posSETTINGS.x=50;
+       posSETTINGS.y=460;
+   posEXIT.x=50;
+   posEXIT.y=540;
+       posLOAD1.x=50;
+       posLOAD1.y=380;
+   posSETTINGS1.x=50;
+   posSETTINGS1.y=460;
+       posEXIT1.x=50;
+       posEXIT1.y=540;
+   posMENU.x=350;
+   posMENU.y=100;
+       posSTORY.x=350;
+       posSTORY.y=100; 
+  posVOL.x=400;
+  posVOL.y=350; 
+       pospleinecran.x=900; 
+       pospleinecran.y=500;
+ TTF_Init();
+    SDL_Color couleurnoir={255,255,255};
+    SDL_Color couleurblanche={0,0,0};
+Mix_Music *musique;
+Mix_Chunk *son;
+ TTF_Font *police=NULL; 
+TTF_Font *policee=NULL;
+   int continuer=1;
+   SDL_Init(SDL_INIT_VIDEO||SDL_INIT_AUDIO);
+   screen = SDL_SetVideoMode(1300,800,32,SDL_HWSURFACE);
+   image=SDL_LoadBMP("images/img.bmp");
+ menu=SDL_LoadBMP("MENU.bmp"); 
+   imageNEWGAME=SDL_LoadBMP("images/NEWGAME.bmp");
+   imageNEWGAME1=SDL_LoadBMP("images/NEWGAME1.bmp");
+   imageLOAD=SDL_LoadBMP("images/LOAD.bmp");
+   imageSETTINGS=SDL_LoadBMP("images/SETTINGS.bmp");
+   imageEXIT=SDL_LoadBMP("images/EXIT.bmp");
+   imageLOAD1=SDL_LoadBMP("images/LOAD1.bmp");
+   imageSETTINGS1=SDL_LoadBMP("images/SETTINGS1.bmp");
+   imageEXIT1=SDL_LoadBMP("images/EXIT1.bmp");
+   story=SDL_LoadBMP("story3.bmp"); 
+   //SDL_SetColorKey(imageNEWGAME, SDL_SRCCOLORKEY, SDL_MapRGB(imageNEWGAME->format,255,255,255));
+   //SDL_SetColorKey(imageNEWGAME1, SDL_SRCCOLORKEY, SDL_MapRGB(imageNEWGAME1->format,255,255,255));
+   //SDL_SetColorKey(imageEXIT, SDL_SRCCOLORKEY, SDL_MapRGB(imageEXIT->format,255,255, 255));
+   SDL_SetColorKey(imageEXIT1, SDL_SRCCOLORKEY, SDL_MapRGB(imageEXIT1->format,255,255, 255));
+   //SDL_SetColorKey(curseur,SDL_SRCCOLORKEY,SDL_MapRGB(curseur->format,255,255,255));
+   SDL_BlitSurface(image,NULL,screen,&posback);
+   SDL_BlitSurface(imageNEWGAME,NULL,screen,&posNEWGAME);
+   SDL_BlitSurface(imageLOAD1,NULL,screen,&posLOAD);
+   SDL_BlitSurface(imageSETTINGS1,NULL,screen,&posSETTINGS);
+   SDL_BlitSurface(imageEXIT1,NULL,screen,&posEXIT);
+   SDL_Flip(screen); 
+
+
+
+if(Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,MIX_DEFAULT_CHANNELS,1024)==-1)
+{printf("%s",Mix_GetError());
+}
+
+musique=Mix_LoadMUS("oblivion.mp3");
+Mix_PlayMusic(musique,-1);
+
+son=Mix_LoadWAV("SON.wav"); 
+
+   while(continuer)
+   {
+      SDL_WaitEvent(&event);
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                continuer = 0;
+
+          case SDL_MOUSEMOTION:
+          x = event.motion.x;
+            y = event.motion.y;
+             break;
+
+
+          case SDL_KEYDOWN:
+{
+
+                   switch(event.key.keysym.sym)
+                   {
+                   case SDLK_DOWN:
+                   Mix_PlayChannel(-1,son,0); 
+               
+                     if (e==2)
+                     {n=2;e=1;l=1;s=1;e1=1;}
+                     else if (n==2)
+                     {l=2;n=1;s=1;e=1;e1=1;}
+                     else if (l==2)
+                     {e=1;l=1;n=1;s=2;e1=1;}
+                     else if (s==2)
+                     {e=2;l=1;n=1;s=1;e1=3;}
+                     break;
+                   case SDLK_UP:
+                   Mix_PlayChannel(-1,son,0); 
+                     if (n==2)
+                     {e=2;n=1;l=1;s=1;e1=3;}
+                     else if (e==2)
+                     {e=1;n=1;l=1;s=2;e1=1;}
+                     else if (s==2)
+                     {e=1;n=1;l=2;s=1;e1=1;}
+                     else if (l==2)
+                     {e=1;n=2;l=1;s=1;e1=1;}
+                   break;
+                  case SDLK_SPACE:
+                    if (e1==3)
+                        {continuer=0;  }
+                  break;
+                   }
+               }
+
+        break;
+                   case SDL_MOUSEBUTTONUP:
+                     switch(event.button.button)
+                   { case SDL_BUTTON_LEFT: 
+                     {x1=event.button.x;
+                     y1=event.button.y;}  
+                     break;
+                                      
+                  }
+                    
+        }
+        SDL_BlitSurface(image,NULL,screen,&posback);      
+
+police=TTF_OpenFont("aa.ttf",65); 
+text=TTF_RenderText_Solid(police,"the four emblems of power",couleurnoir);
+posTXT.x=250; 
+posTXT.y=0;
+SDL_BlitSurface(text,NULL,screen,&posTXT); 
+SDL_Flip(screen);
+
+
+curseur=SDL_LoadBMP("curseur.bmp");
+SDL_ShowCursor(SDL_DISABLE);
+      SDL_PollEvent(&event);
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                continuer = 0;
+
+          case SDL_MOUSEMOTION:
+          poscurseur.x = event.motion.x;
+            poscurseur.y = event.motion.y; 
+             break;
+}
+SDL_BlitSurface(curseur,NULL,screen,&poscurseur);
+SDL_Flip(screen);
+
+switch(event.type)
+{case SDL_QUIT:
+continuer=0;
+break;
+case SDL_MOUSEBUTTONUP: 
+if (event.button.button==SDL_BUTTON_LEFT){
+Mix_PlayChannel(1,son,0);
+break;
+}}
+
+
+
+
+
+
+switch(event.type)
+{case SDL_QUIT:
+continuer=0;
+break;
+case SDL_MOUSEBUTTONUP: 
+if (event.button.button==SDL_BUTTON_LEFT && ( x1 > box_x ) && ( x1 < box_x + box_w ) && ( y1 > box_y2 ) && ( y1 < box_y2 + box_h )){ 
+  
+optionn=2;x1=0;y1=0;
+break;
+}}
+
+switch(event.type)
+{case SDL_QUIT:
+continuer=0;
+break;
+case SDL_MOUSEBUTTONUP: 
+ if (event.button.button==SDL_BUTTON_LEFT)
+  {x1=event.button.x;y1=event.button.y;}
+if (event.button.button==SDL_BUTTON_LEFT && ( event.button.x > box_x ) && ( event.button.x < box_x + box_w ) && ( event.button.y > box_y1 ) && ( event.button.y < box_y1 + box_h )){
+ SDL_BlitSurface(story,NULL,screen,&posSTORY);
+
+break;
+
+}}
+
+switch(event.type)
+{case SDL_QUIT:
+continuer=0;
+break;
+case SDL_MOUSEBUTTONUP: 
+if (event.button.button==SDL_BUTTON_LEFT &&  ( event.button.x > box_x ) && ( event.button.x < box_x + box_w ) && ( event.button.y > box_y ) && ( event.button.y < box_y + box_h )){
+policee=TTF_OpenFont("aa.ttf",50); 
+texte=TTF_RenderText_Solid(policee,"nouvelle partie",couleurblanche);
+postexte.x=300; 
+postexte.y=300;
+SDL_BlitSurface(texte,NULL,screen,&postexte); 
+SDL_Flip(screen);
+break;
+}} 
+
+
+switch(event.type)
+{
+case SDL_MOUSEBUTTONUP: 
+if (event.button.button==SDL_BUTTON_LEFT &&  ( event.button.x > box_x ) && ( event.button.x < box_x + box_w ) && ( event.button.y > box_y3 ) && ( event.button.y < box_y3 + box_h )){
+continuer=0;
+break;
+}}
+ if (event.key.keysym.sym==SDLK_ESCAPE)
+   { if (optionn==2)
+       {optionn=1;}}
+
+
+       if (n==1)
+       { SDL_BlitSurface(imageNEWGAME1,NULL,screen,&posNEWGAME1); }
+        else if (n==2)
+       {SDL_BlitSurface(imageNEWGAME,NULL,screen,&posNEWGAME);}
+        if (l==1)
+       {SDL_BlitSurface(imageLOAD1,NULL,screen,&posLOAD1);}
+   else if (l==2)
+    {SDL_BlitSurface(imageLOAD,NULL,screen,&posLOAD);}
+   if (s==1)
+   {SDL_BlitSurface(imageSETTINGS1,NULL,screen,&posSETTINGS1);}
+   else if (s==2)
+   {SDL_BlitSurface(imageSETTINGS,NULL,screen,&posSETTINGS);}
+   if (e==1)
+   {SDL_BlitSurface(imageEXIT1,NULL,screen,&posEXIT1);}
+   else if(e==2)
+   {SDL_BlitSurface(imageEXIT,NULL,screen,&posEXIT);}
+
+      if( ( x > box_x ) && (x  < box_x + box_w ) && (y > box_y ) && ( y< box_y + box_h ) )
+            {     
+                 SDL_BlitSurface(imageNEWGAME,NULL,screen,&posNEWGAME);
+                 SDL_BlitSurface(imageLOAD1,NULL,screen,&posLOAD);
+                 SDL_BlitSurface(imageSETTINGS1,NULL,screen,&posSETTINGS);
+                 SDL_BlitSurface(imageEXIT1,NULL,screen,&posEXIT1);
+                 //Mix_PlayChannel(1,son,0);x=0;y=0;
+             
+            }
+     if( ( x > box_x ) && ( x < box_x + box_w ) && ( y > box_y1 ) && ( y < box_y1 + box_h ) )
+            {
+                 SDL_BlitSurface(imageNEWGAME1,NULL,screen,&posNEWGAME);
+                 SDL_BlitSurface(imageLOAD,NULL,screen,&posLOAD);
+                 SDL_BlitSurface(imageSETTINGS1,NULL,screen,&posSETTINGS);
+                 SDL_BlitSurface(imageEXIT1,NULL,screen,&posEXIT1);
+                 //Mix_PlayChannel(1,son,0);x=0;y=0;
+          }
+     if( ( x > box_x ) && ( x < box_x + box_w ) && ( y > box_y2 ) && ( y < box_y2 + box_h ) )
+            {
+                SDL_BlitSurface(imageNEWGAME1,NULL,screen,&posNEWGAME);
+                 SDL_BlitSurface(imageLOAD1,NULL,screen,&posLOAD);
+                 SDL_BlitSurface(imageSETTINGS,NULL,screen,&posSETTINGS);
+                 SDL_BlitSurface(imageEXIT1,NULL,screen,&posEXIT1);
+                 //Mix_PlayChannel(1,son,0);x=0;y=0;
+            }
+    if( ( x > box_x ) && ( x < box_x + box_w ) && ( y > box_y3 ) && ( y < box_y3 + box_h ) )
+            {
+                SDL_BlitSurface(imageNEWGAME1,NULL,screen,&posNEWGAME);
+                 SDL_BlitSurface(imageLOAD1,NULL,screen,&posLOAD);
+                 SDL_BlitSurface(imageSETTINGS1,NULL,screen,&posSETTINGS);
+                 SDL_BlitSurface(imageEXIT,NULL,screen,&posEXIT1);
+                 //Mix_PlayChannel(1,son,0);x=0;y=0;
+            }
+    
+
+
+
+if (optionn==2)
+{SDL_BlitSurface(menu,NULL,screen,&posMENU);   
+policee=TTF_OpenFont("aa.ttf",50); 
+ op=TTF_RenderText_Blended(policee,"volume",couleurblanche);   
+posOP.x=900;
+posOP.y=350; 
+SDL_BlitSurface(op,NULL,screen,&posOP);
+vol=SDL_LoadBMP("volume0.bmp"); 
+SDL_BlitSurface(vol,NULL,screen,&posVOL); 
+pe=TTF_RenderText_Blended(policee,"mode plein ecran:",couleurblanche);   
+pospe.x=400;
+pospe.y=500;
+SDL_BlitSurface(pe,NULL,screen,&pospe); 
+pleinecran=SDL_LoadBMP("on.bmp"); 
+SDL_BlitSurface(pleinecran,NULL,screen,&pospleinecran); 
+}
+if(optionn==2){
+if(event.type==SDL_KEYUP){
+switch(event.key.keysym.sym)
+{
+case SDLK_RIGHT:
+i++; 
+break;}
+switch(i){
+case 6: 
+   img=SDL_LoadBMP("volume6.bmp"); 
+posimg.x=400; 
+posimg.y=350; 
+SDL_BlitSurface(img,NULL,screen,&posimg);
+i=0; 
+Mix_VolumeMusic(MIX_MAX_VOLUME+(MIX_MAX_VOLUME));
+break; 
+case 5: 
+   img=SDL_LoadBMP("volume5.bmp"); 
+posimg.x=400;
+posimg.y=350; 
+SDL_BlitSurface(img,NULL,screen,&posimg);
+Mix_VolumeMusic(MIX_MAX_VOLUME+(MIX_MAX_VOLUME/6)*2);
+break; 
+case 4: 
+   img=SDL_LoadBMP("volume4.bmp"); 
+posimg.x=400; 
+posimg.y=350; 
+ SDL_BlitSurface(img,NULL,screen,&posimg);
+Mix_VolumeMusic(MIX_MAX_VOLUME+(MIX_MAX_VOLUME/3));
+break; 
+case 3: 
+   img=SDL_LoadBMP("volume3.bmp"); 
+posimg.x=400; 
+posimg.y=350; 
+ SDL_BlitSurface(img,NULL,screen,&posimg);
+Mix_VolumeMusic(MIX_MAX_VOLUME+(MIX_MAX_VOLUME/4));
+break; 
+case 2: 
+   img=SDL_LoadBMP("volume2.bmp"); 
+posimg.x=400; 
+posimg.y=350; 
+SDL_BlitSurface(img,NULL,screen,&posimg);
+Mix_VolumeMusic(MIX_MAX_VOLUME+(MIX_MAX_VOLUME/5));
+break; 
+case 1: 
+   img=SDL_LoadBMP("volume1.bmp"); 
+posimg.x=400; 
+posimg.y=350; 
+SDL_BlitSurface(img,NULL,screen,&posimg); 
+Mix_VolumeMusic(MIX_MAX_VOLUME+(MIX_MAX_VOLUME/6));
+break; 
+if(event.type==SDL_KEYUP){
+case SDLK_LEFT:
+i--; 
+break;}
+switch(i){
+case 6: 
+   img=SDL_LoadBMP("volume6.bmp"); 
+posimg.x=400; 
+posimg.y=350; 
+SDL_BlitSurface(img,NULL,screen,&posimg);
+
+break; 
+case 5: 
+   img=SDL_LoadBMP("volume5.bmp"); 
+posimg.x=400; 
+posimg.y=350; 
+SDL_BlitSurface(img,NULL,screen,&posimg);
+break; 
+case 4: 
+   img=SDL_LoadBMP("volume4.bmp"); 
+posimg.x=400; 
+posimg.y=350; 
+ SDL_BlitSurface(img,NULL,screen,&posimg);
+break; 
+case 3: 
+   img=SDL_LoadBMP("volume3.bmp"); 
+posimg.x=400; 
+posimg.y=350; 
+ SDL_BlitSurface(img,NULL,screen,&posimg);
+break; 
+case 2: 
+   img=SDL_LoadBMP("volume2.bmp"); 
+posimg.x=400; 
+posimg.y=350; 
+SDL_BlitSurface(img,NULL,screen,&posimg);
+break; 
+case 1: 
+   img=SDL_LoadBMP("volume1.bmp"); 
+posimg.x=400; 
+posimg.y=350; 
+SDL_BlitSurface(img,NULL,screen,&posimg); 
+i=0;
+break; 
+}
+}} }
+
+/*if(optionn==2){
+
+SDL_WaitEvent(&event);
+switch(event.type){
+case SDL_QUIT:
+continuer=0;
+break;
+ case SDL_KEYDOWN:
+switch(event.key.keysym.sym){
+case SDLK_o:
+ screen = SDL_SetVideoMode(1300,800,32,SDL_HWSURFACE|SDL_DOUBLEBUF|SDL_FULLSCREEN); SDL_Flip(screen);
+break; 
+}break;}}*/
+
+ SDL_Flip(screen);
+   }
+ SDL_FreeSurface(image);
+ SDL_FreeSurface(imageNEWGAME);
+ SDL_FreeSurface(imageNEWGAME1);
+ SDL_FreeSurface(imageLOAD);
+ SDL_FreeSurface(imageSETTINGS);
+ SDL_FreeSurface(imageEXIT);
+ SDL_FreeSurface(imageLOAD1);
+ SDL_FreeSurface(imageSETTINGS1);
+ SDL_FreeSurface(imageEXIT1); 
+ SDL_FreeSurface(menu);
+ SDL_FreeSurface(story); 
+ SDL_FreeSurface(img);
+TTF_CloseFont(police); 
+TTF_Quit();
+TTF_CloseFont(policee); 
+TTF_Quit();
+SDL_FreeSurface(texte);
+SDL_Quit();
+SDL_FreeSurface(text);
+SDL_Quit();
+SDL_FreeSurface(op);
+SDL_Quit();
+Mix_FreeMusic(musique);
+Mix_CloseAudio();
+SDL_Quit();
+Mix_FreeChunk(son);
+SDL_Quit(); 
+    return 0;
+}
