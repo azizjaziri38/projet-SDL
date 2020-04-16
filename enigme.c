@@ -55,7 +55,7 @@ e->img=NULL;
   else if(strcmp(image,"5.bmp")==0)
   {
   s =2;
-(*ques)=5;
+(*ques)
   }
   else if(strcmp(image,"6.bmp")==0)
   {
